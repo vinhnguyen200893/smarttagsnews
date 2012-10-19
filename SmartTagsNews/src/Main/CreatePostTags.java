@@ -18,13 +18,13 @@ public class CreatePostTags {
 	private static Logger logger=Logger.getLogger("Main");
 	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
-		CreatePostTagsRun classifer = new CreatePostTagsRun();
+		CreatePostTagsRun createPostTags = new CreatePostTagsRun();
 		ConfigUtil.loadConfig();
         StopWatch stopWatch = new StopWatch();
         while (true) {
             try {
                 stopWatch.start();
-                classifer.run();
+                createPostTags.run();
                 stopWatch.stop();
                 logger.info("run time:" + stopWatch);
             } catch (Exception exp) {
