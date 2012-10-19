@@ -42,6 +42,7 @@ public class CreatePostTagsRun {
 			Document doc=Jsoup.parse(news.getContent());
 			String postTags=vietTagger.tagging(doc.body().text());
 			smartTagsNewsDao.updatePostTags(news.getNewsID(), postTags);
+			logger.info(news.getNewsID());
 		}
 	}
 	
