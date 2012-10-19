@@ -55,6 +55,7 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.info("Error",e);
+			System.out.println("Error:"+e);
 		}
 		
 	}
