@@ -6,5 +6,5 @@ import com.vcc.smarttags.bo.NewsInfo;
 
 public interface SmartTagsNewsDao {
 	List<NewsInfo> getListAllNews();
-	void updatePostTags(Long newsId);
+	void updatePostTags(Long newsId,String postTags);
 }
