@@ -9,7 +9,7 @@ public class ConfigUtil {
 	public static void loadConfig() throws IOException
 	{
 	Properties pro=new Properties();
-	File f=new File("config.properties");
+	File f=new File("conf.properties");
 	FileInputStream in=new FileInputStream(f);
 	pro.load(in);
 	SystemInfo.File_StopWords=pro.getProperty("File_StopWords");
@@ -22,6 +22,7 @@ public class ConfigUtil {
 	SystemInfo.MYSQL_DB_PASS=pro.getProperty("MYSQL_DB_PASS");
 	SystemInfo.MYSQL_DB_UID=pro.getProperty("MYSQL_DB_UID");
 	SystemInfo.NO_OF_DAY_TO_GET_CONTENT=Integer.valueOf(pro.getProperty("NO_OF_DAY_TO_GET_CONTENT"));
+	SystemInfo.TIME_SLEEP_WHEN_RERUN_JOB_IN_SECS=Integer.valueOf(pro.getProperty("TIME_SLEEP_WHEN_RERUN_JOB_IN_SECS"));
 	}
 
 }

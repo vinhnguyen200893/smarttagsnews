@@ -11,4 +11,5 @@ public class SystemInfo {
 	public static String MYSQL_DB_UID;
 	public static String MYSQL_DB_PASS;
 	public static Integer NO_OF_DAY_TO_GET_CONTENT;
+	public static Integer TIME_SLEEP_WHEN_RERUN_JOB_IN_SECS;
 }
