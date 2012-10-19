@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+    <appender name="CA" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="R" class="org.apache.log4j.FileAppender">
+        <param name="file" value="logs/example.log"/>
+        <param name="MaxFileSize" value="100KB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="1"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%p %t %c - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="MainA" class="org.apache.log4j.RollingFileAppender">
+        <param name="encoding" value="UTF-8"/>
+        <param name="MaxBackupIndex" value="1"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="file" value="logs/error.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="Threshold" value="ERROR"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-25d{ISO8601}] %-5p %x %C{1} -- %m\n"/>
+        </layout>
+    </appender>
+
+    <appender name="MainE" class="org.apache.log4j.RollingFileAppender">
+        <param name="MaxBackupIndex" value="1"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="file" value="logs/main.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="Threshold" value="DEBUG"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-25d{ISO8601}] %-5p %x %C{1} -- %m\n"/>
+        </layout>
+    </appender>
+
+    <appender name="BatchA" class="org.apache.log4j.RollingFileAppender">
+        <param name="append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="file" value="logs/batch.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd"/>
+        <param name="Threshold" value="INFO"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-25d{ISO8601}] %-5p %x %C{1} -- %m\n"/>
+        </layout>
+    </appender>
+
+
+
+    <logger name="Main">
+        <level value="INFO"/>
+        <appender-ref ref="BatchA"/>
+    </logger>
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="MainE"/>
+        <appender-ref ref="MainA"/>
+        <appender-ref ref="CA"/>
+    </root>
+
+</log4j:configuration>
