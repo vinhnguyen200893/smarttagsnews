@@ -20,7 +20,7 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 	public List<NewsInfo> getListAllNews() {
 		// TODO Auto-generated method stub
 		List<NewsInfo> newsInfos=new ArrayList<NewsInfo>();
-		String query = "select min(newsid),min(publishdate),newsurl,min(cat_id),id,Content,GeneralCatID from ViewForAdmicro a where createDate >=DATE_ADD(CURDATE(),INTERVAL " + (-1) * SystemInfo.NO_OF_DAY_TO_GET_CONTENT + " DAY) group by newsurl";
+		String query = "select NewsId,id,Content from ViewForAdmicro where postTags is null";
 		try {
 			Connection connection=ConnectionPool.getConnection();
 			PreparedStatement statement=connection.prepareStatement(query);
@@ -32,6 +32,9 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 				item.setContent(rs.getString("Content"));
 				newsInfos.add(item);
 			}
+			rs.close();
+			statement.close();
+			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.info("Error",e);
@@ -40,8 +43,19 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 	}
 
 	@Override
-	public void updatePostTags(Long newsId) {
+	public void updatePostTags(Long newsId,String postTags) {
 		// TODO Auto-generated method stub
+		String queryUpdate="Update ViewForAdmicro set postTags ='"+postTags+"' where NewsId="+newsId+"";
+		try {
+			Connection connection=ConnectionPool.getConnection();
+			PreparedStatement statement=connection.prepareStatement(queryUpdate);
+			statement.executeUpdate();
+			statement.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logger.info("Error",e);
+		}
 		
 	}
 
