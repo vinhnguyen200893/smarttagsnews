@@ -29,6 +29,7 @@ public class CreatePostTags {
                 logger.info("run time:" + stopWatch);
             } catch (Exception exp) {
                 logger.fatal("error", exp);
+                System.out.println("Error:"+exp);
             }
             logger.info("done!!! We sleep " + SystemInfo.TIME_SLEEP_WHEN_RERUN_JOB_IN_SECS + " secs now!!");
             Thread.sleep(SystemInfo.TIME_SLEEP_WHEN_RERUN_JOB_IN_SECS * 1000);
