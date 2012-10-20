@@ -8,6 +8,7 @@ import jvntagger.POSTagger;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.junit.Test;
 
 import vn.hus.nlp.tagger.VietnameseMaxentTagger;
 import vn.hus.nlp.tagger.test.VietnameseTaggerTest;
@@ -40,7 +41,9 @@ public class CreatePostTagsRun {
 		for(NewsInfo news:newsInfos)
 		{
 			Document doc=Jsoup.parse(news.getContent());
-			String postTags=vietTagger.tagging(tokenizer.segment(doc.body().text()));
+			System.out.println(doc.text());
+			tokenizer.turnOnSentenceDetection();
+			String postTags=vietTagger.tagging(tokenizer.tokenize(doc.text()).toString());
 			smartTagsNewsDao.updatePostTags(news.getNewsID(), postTags);
 			System.out.println(news.getNewsID());
 			logger.info(news.getNewsID());
