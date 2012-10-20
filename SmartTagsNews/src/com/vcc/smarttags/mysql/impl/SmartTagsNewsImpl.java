@@ -20,7 +20,7 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 	public List<NewsInfo> getListAllNews() {
 		// TODO Auto-generated method stub
 		List<NewsInfo> newsInfos=new ArrayList<NewsInfo>();
-		String query = "select NewsId,id,Content from ViewForAdmicro where postTags is null";
+		String query = "select NewsId,id,Content,Title from ViewForAdmicro where postTags is null";
 		try {
 			Connection connection=ConnectionPool.getConnection();
 			PreparedStatement statement=connection.prepareStatement(query);
@@ -30,6 +30,7 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 				item.setNewsID(rs.getLong("newsid"));
 				item.setId(rs.getInt("id"));
 				item.setContent(rs.getString("Content"));
+				item.setTitle(rs.getString("Title"));
 				newsInfos.add(item);
 			}
 			rs.close();
@@ -38,6 +39,7 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.info("Error",e);
+			System.out.println("Error:"+e);
 		}
 		return newsInfos;
 	}
@@ -45,10 +47,11 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 	@Override
 	public void updatePostTags(Long newsId,String postTags) {
 		// TODO Auto-generated method stub
-		String queryUpdate="Update ViewForAdmicro set postTags ='"+postTags+"' where NewsId="+newsId+"";
+		String queryUpdate="Update ViewForAdmicro set postTags =? where NewsId="+newsId+"";
 		try {
 			Connection connection=ConnectionPool.getConnection();
 			PreparedStatement statement=connection.prepareStatement(queryUpdate);
+			statement.setString(1,postTags);
 			statement.executeUpdate();
 			statement.close();
 			connection.close();
