@@ -22,12 +22,14 @@ public class CreatePostTagsRun {
 	private SmartTagsNewsDao smartTagsNewsDao;
 	static Logger logger=Logger.getLogger("Main");
 	private VietTokenizer tokenizer;
-	private POSTagger vietTagger=null;
+   private POSTagger vietTagger=null;
+	//private VietnameseMaxentTagger vietTagger=null;
 	public CreatePostTagsRun() {
 		// TODO Auto-generated constructor stub
 		smartTagsNewsDao=new SmartTagsNewsImpl();
-		tokenizer=new VietTokenizer();
+	    tokenizer=new VietTokenizer();
 		vietTagger=new MaxentTagger("models/maxent");
+	//	vietTagger=new VietnameseMaxentTagger();
 	}
 	public SmartTagsNewsDao getSmartTagsNewsDao() {
 		return smartTagsNewsDao;
@@ -41,9 +43,8 @@ public class CreatePostTagsRun {
 		for(NewsInfo news:newsInfos)
 		{
 			Document doc=Jsoup.parse(news.getContent());
-			System.out.println(doc.text());
-			tokenizer.turnOnSentenceDetection();
-			String postTags=vietTagger.tagging(tokenizer.tokenize(doc.text()).toString());
+		//	String postTags=vietTaggertagText(doc..text());
+			String postTags=vietTagger.tagging(doc.text());
 			smartTagsNewsDao.updatePostTags(news.getNewsID(), postTags);
 			System.out.println(news.getNewsID());
 			logger.info(news.getNewsID());

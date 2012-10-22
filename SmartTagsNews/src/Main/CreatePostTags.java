@@ -4,6 +4,7 @@ package Main;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 
 import com.ecyrd.speed4j.StopWatch;
 import com.vcc.smarttags.config.ConfigUtil;
@@ -18,6 +19,7 @@ public class CreatePostTags {
 	private static Logger logger=Logger.getLogger("Main");
 	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
+		DOMConfigurator.configure("log4j.xml");
 		CreatePostTagsRun createPostTags = new CreatePostTagsRun();
 		ConfigUtil.loadConfig();
         StopWatch stopWatch = new StopWatch();

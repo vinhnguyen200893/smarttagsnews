@@ -29,7 +29,7 @@
         </layout>
     </appender>
 
-    <appender name="MainB" class="org.apache.log4j.RollingFileAppender">
+    <appender name="MainE" class="org.apache.log4j.RollingFileAppender">
         <param name="MaxBackupIndex" value="1"/>
         <param name="encoding" value="UTF-8"/>
         <param name="MaxFileSize" value="10MB"/>
