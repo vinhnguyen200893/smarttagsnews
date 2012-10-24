@@ -53,11 +53,30 @@ public class SmartTagsNewsImpl implements SmartTagsNewsDao {
 			statement.setString(1,postTags);
 			statement.executeUpdate();
 			statement.close();
-			connection.close();
+		    connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			logger.info("Error",e);
 		}
+		
+	}
+
+	@Override
+	public void updateError(Long newsId) {
+		// TODO Auto-generated method stub
+		String postTags="Error";
+		String queryUpdate="Update ViewForAdmicro set postTags ='"+postTags+"' where NewsId="+newsId+"";
+		try {
+			Connection connection=ConnectionPool.getConnection();
+			PreparedStatement statement=connection.prepareStatement(queryUpdate);
+			statement.executeUpdate();
+			statement.close();
+		    connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			logger.info("Error",e);
+		}
+		
 		
 	}
 
