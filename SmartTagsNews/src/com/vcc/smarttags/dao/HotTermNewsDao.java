@@ -9,4 +9,5 @@ public interface HotTermNewsDao {
 	Map<Long,String> getListDocs();
 	void updateHotTerm();
 	List<Long> listNewsIdUpdated();
+	List<String> getListNounPhrase();
 }
