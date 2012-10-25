@@ -139,5 +139,10 @@ public class FrequencyTermImpl implements HotTermNewsDao {
 		}
 		return listNewsId;
 	}
+	@Override
+	public List<String> getListNounPhrase() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
